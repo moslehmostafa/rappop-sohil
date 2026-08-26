@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RAPPOP SOHIL | Music</title>
+  <meta name="description" content="RAPPOP SOHIL - سایت رسمی پخش موسیقی">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #070707;
+      --card: #111;
+      --green: #b7ff00;
+      --white: #fff;
+      --gray: #999;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      padding-bottom: 100px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5,5,5,.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid #222;
+    }
+
+    nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 25px;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .navlinks a:hover {
+      color: var(--green);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 500px;
+      margin: 25px 0;
+      border-radius: 28px;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          #000 0%,
+          rgba(0,0,0,.65) 45%,
+          rgba(0,0,0,.15) 100%
+        ),
+        url("assets/hero-banner.png")
+        center / cover no-repeat;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      padding: 50px;
+      max-width: 650px;
+    }
+
+    .tag {
+      color: var(--green);
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 80px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: #ddd;
+      line-height: 2;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-flex;
+      padding: 14px 24px;
+      border-radius: 14px;
+      background: var(--green);
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      margin: 55px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-size: 27px;
+    }
+
+    .section-head span {
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    /* SEARCH */
+
+    .search {
+      width: 100%;
+      background: #111;
+      border: 1px solid #292929;
+      color: white;
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 18px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: var(--green);
+    }
+
+    /* FILTER */
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      border: 1px solid #333;
+      background: #111;
+      color: #ccc;
+      padding: 10px 17px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: var(--green);
+      color: #000;
+      border-color: var(--green);
+    }
+
+    /* MUSIC */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .track {
+      background: linear-gradient(145deg,#151515,#0d0d0d);
+      border: 1px solid #252525;
+      border-radius: 20px;
+      padding: 18px;
+
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      transition: .25s;
+    }
+
+    .track:hover {
+      transform: translateY(-4px);
+      border-color: #555;
+    }
+
+    .cover {
+      width: 65px;
+      height: 65px;
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #222,
+          var(--green)
+        );
+
+      display: grid;
+      place-items: center;
+
+      color: #000;
+      font-size: 25px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .info h3 {
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .info p {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .play {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--green);
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    /* ARTIST */
+
+    .artist {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      background: #101010;
+      border: 1px solid #222;
+      border-radius: 25px;
+      padding: 30px;
+    }
+
+    .artist-avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+
+      background:
+        url("assets/hero-banner.png")
+        center / cover no-repeat;
+
+      flex-shrink: 0;
+    }
+
+    .artist p {
+      color: #aaa;
+      line-height: 2;
+      margin-top: 10px;
+    }
+
+    /* PLAYER */
+
+    .player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 200;
+
+      background: rgba(12,12,12,.95);
+      backdrop-filter: blur(18px);
+
+      border-top: 1px solid #2a2a2a;
+
+      padding: 13px 4%;
+
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .player-info {
+      flex: 1;
+    }
+
+    .player-info b {
+      display: block;
+    }
+
+    .player-info small {
+      color: #888;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .controls button {
+      border: 0;
+      background: #1c1c1c;
+      color: white;
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .controls .main {
+      background: var(--green);
+      color: #000;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #222;
+      color: #777;
+      text-align: center;
+      padding: 35px 10px;
+      margin-top: 60px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      .navlinks {
+        display: none;
+      }
+
+      .hero {
+        min-height: 430px;
+      }
+
+      .hero-content {
+        padding: 30px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .artist {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .player-info {
+        display: none;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="container">
+
+    <nav>
+
+      <div class="logo">
+        RAPPOP <span>SOHIL</span>
+      </div>
+
+      <div class="navlinks">
+        <a href="#home">خانه</a>
+        <a href="#music">موسیقی</a>
+        <a href="#artist">درباره خواننده</a>
+      </div>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <div class="tag">
+        OFFICIAL MUSIC PLATFORM
+      </div>
+
+      <h1>
+        RAPPOP
+        <br>
+        <span style="color:var(--green)">
+          SOHIL
+        </span>
+      </h1>
+
+      <p>
+        جدیدترین موزیک‌ها، تک‌آهنگ‌ها و آلبوم‌های
+        RAPPOP SOHIL را آنلاین گوش کنید.
+      </p>
+
+      <a class="btn" href="#music">
+        ▶ شروع پخش
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- MUSIC -->
+
+  <section class="section" id="music">
+
+    <div class="section-head">
+
+      <h2>
+        موزیک‌ها
+      </h2>
+
+      <span>
+        NEW RELEASES
+      </span>
+
+    </div>
+
+
+    <input
+      id="search"
+      class="search"
+      placeholder="جستجوی آهنگ یا آلبوم..."
+    >
+
+
+    <div class="chips">
+
+      <button
+        class="chip active"
+        data-filter="all">
+        همه
+      </button>
+
+      <button
+        class="chip"
+        data-filter="single">
+        تک آهنگ
+      </button>
+
+      <button
+        class="chip"
+        data-filter="album">
+        آلبوم
+      </button>
+
+    </div>
+
+
+    <div
+      class="grid"
+      id="tracks">
+    </div>
+
+  </section>
+
+
+  <!-- ARTIST -->
+
+  <section
+    class="section"
+    id="artist">
+
+    <div class="artist">
+
+      <div class="artist-avatar"></div>
+
+      <div>
+
+        <div class="tag">
+          ARTIST
+        </div>
+
+        <h2>
+          RAPPOP SOHIL
+        </h2>
+
+        <p>
+          صفحه رسمی موسیقی RAPPOP SOHIL
+          برای معرفی و پخش آثار موسیقی.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  © 2026 RAPPOP SOHIL
+  —
+  All Rights Reserved
+
+</footer>
+
+
+<!-- MUSIC PLAYER -->
+
+<div class="player">
+
+  <div class="player-info">
+
+    <b id="now">
+      هنوز آهنگی پخش نشده
+    </b>
+
+    <small id="state">
+      RAPPOP SOHIL
+    </small>
+
+  </div>
+
+
+  <div class="controls">
+
+    <button id="prev">
+      ‹
+    </button>
+
+    <button
+      class="main"
+      id="toggle">
+      ▶
+    </button>
+
+    <button id="next">
+      ›
+    </button>
+
+  </div>
+
+</div>
+
+
+<audio id="audio"></audio>
+
+
+<script>
+
+const songs = [
+
+  {
+    title: "Track 01",
+    type: "single",
+    file: "",
+    artist: "RAPPOP SOHIL"
+  },
+
+  {
+    title: "Track 02",
+    type: "single",
+    file: "",
+    artist: "RAPPOP SOHIL"
+  },
+
+  {
+    title: "Track 03",
+    type: "album",
+    file: "",
+    artist: "RAPPOP SOHIL"
+  }
+
+];
+
+
+let current = 0;
+let playing = false;
+
+
+const audio =
+  document.getElementById("audio");
+
+const list =
+  document.getElementById("tracks");
+
+const now =
+  document.getElementById("now");
+
+const state =
+  document.getElementById("state");
+
+const toggle =
+  document.getElementById("toggle");
+
+
+function render(
+  filter = "all",
+  query = ""
+) {
+
+  list.innerHTML = "";
+
+  songs
+    .filter(song => {
+
+      const matchesFilter =
+        filter === "all" ||
+        song.type === filter;
+
+      const matchesSearch =
+        `${song.title} ${song.artist}`
+          .toLowerCase()
+          .includes(
+            query.toLowerCase()
+          );
+
+      return (
+        matchesFilter &&
+        matchesSearch
+      );
+
+    })
+    .forEach((song) => {
+
+      const index =
+        songs.indexOf(song);
+
+      list.innerHTML += `
+
+        <div class="track">
+
+          <div class="cover">
+            ♪
+          </div>
+
+          <div class="info">
+
+            <h3>
+              ${song.title}
+            </h3>
+
+            <p>
+              ${song.artist}
+              •
+              ${song.type === "album"
+                ? "Album"
+                : "Single"}
+            </p>
+
+          </div>
+
+          <button
+            class="play"
+            onclick="playSong(${index})">
+
+            ▶
+
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+}
+
+
+function playSong(index) {
+
+  current = index;
+
+  const song =
+    songs[index];
+
+  now.textContent =
+    song.title;
+
+  state.textContent =
+    song.artist;
+
+
+  if (!song.file) {
+
+    playing = !playing;
+
+    toggle.textContent =
+      playing ? "Ⅱ" : "▶";
+
+    return;
+
+  }
+
+
+  audio.src =
+    song.file;
+
+  audio.play();
+
+  playing = true;
+
+  toggle.textContent =
+    "Ⅱ";
+
+}
+
+
+toggle.onclick =
+  () => playSong(current);
+
+
+document
+  .getElementById("prev")
+  .onclick = () => {
+
+    playSong(
+      (current - 1 + songs.length)
+      % songs.length
+    );
+
+  };
+
+
+document
+  .getElementById("next")
+  .onclick = () => {
+
+    playSong(
+      (current + 1)
+      % songs.length
+    );
+
+  };
+
+
+document
+  .getElementById("search")
+  .oninput = event => {
+
+    const active =
+      document.querySelector(
+        ".chip.active"
+      );
+
+    render(
+      active.dataset.filter,
+      event.target.value
+    );
+
+  };
+
+
+document
+  .querySelectorAll(".chip")
+  .forEach(button => {
+
+    button.onclick = () => {
+
+      document
+        .querySelectorAll(".chip")
+        .forEach(
+          item =>
+            item.classList.remove("active")
+        );
+
+      button.classList.add("active");
+
+      render(
+        button.dataset.filter,
+        document.getElementById("search").value
+      );
+
+    };
+
+  });
+
+
+render();
+
+</script>
+
+</body>
+</html>
